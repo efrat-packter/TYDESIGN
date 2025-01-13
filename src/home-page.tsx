@@ -81,33 +81,18 @@ import FormComponent from './FormComonent';
 import Carousel from './ImageCarousel';
 import Gallery from './ProjectsGallery'
 import UploadProject from './upload';
+import NavBar from './Nav'
+import About from './about'
 const HomePage = () => {
     return (
         <div>
-            {/* תפריט ניווט */}
-            <nav className="navbar">
-                <div className="logo">
-                    <a href="#">לוגו</a>
-                </div>
-                <ul className="nav-links">
-                    <li><a href="#home">דף ראשי</a></li>
-                    <li><a href="#projects">פרויקטים</a></li>
-                    <li><a href="#about">אודות</a></li>
-                    <li><a href="#contact">צור קשר</a></li>
-                </ul>
-            </nav>
 
-          
+         <NavBar></NavBar> 
       <Carousel></Carousel>
 <Gallery></Gallery>
 <UploadProject></UploadProject>
-        {/* קצת עלי */}
-            <section id="about">
-                <h2>קצת עלי</h2>
-                <img src="designer.jpg" alt="המעצבת" className="designer-image" />
-                <p>המעצבת שתעזור לך לעצב את הבית שלך בצורה מושלמת.</p>
-            </section>
-
+        
+<About></About>
        
 <FormComponent></FormComponent>
         </div>

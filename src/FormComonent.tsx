@@ -1,40 +1,88 @@
 import React, { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
+import axios from "axios";
 
 const FileUploadForm = () => {
-  const [file1, setFile1] = useState("");
-  const [file2, setFile2] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState({
-    file1: "",
-    file2: "",
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  // const isValidEmail = (email: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isValidPhone = (phone:string) => /^[0-9]{10}$/.test(phone);
+
+  const handleSubmit = async (event:React.FormEvent<HTMLFormElement>): Promise<void> =>  {
     event.preventDefault();
 
-    // Clear any previous errors
+    // Clear previous errors
     setError({
-      file1: "",
-      file2: "",
+      name: "",
+      phone: "",
+      email: "",
+      message: "",
     });
 
     let formHasError = false;
 
-    // Check if required fields are filled
-    if (!file1) {
-      setError((prev) => ({ ...prev, file1: "שדה זה דרוש" }));
+    // Validate fields
+    if (!name) {
+      setError((prev) => ({ ...prev, name: "שדה זה דרוש" }));
       formHasError = true;
     }
-    if (!file2) {
-      setError((prev) => ({ ...prev, file2: "שדה זה דרוש" }));
+    if (!phone) {
+      setError((prev) => ({ ...prev, phone: "שדה זה דרוש" }));
+      formHasError = true;
+    } else if (!isValidPhone(phone)) {
+      setError((prev) => ({ ...prev, phone: "מספר טלפון לא חוקי" }));
+      formHasError = true;
+    }
+    if (email && !isValidEmail(email)) {
+      setError((prev) => ({ ...prev, email: "כתובת אימייל לא חוקית" }));
       formHasError = true;
     }
 
     if (formHasError) return;
 
-    console.log("Form submitted:", { file1, file2, email, message });
+    setIsSubmitting(true);
+
+    // Create FormData and append the data
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("message", message);
+    
+    try {
+      console.log("gfdg")
+      const response = await axios.post("http://localhost:3000/upload/send-email/", formData, {
+       method: 'POST',
+        // body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Form submitted successfully:", response.data);
+      alert("הטופס נשלח בהצלחה!");
+      // Clear the form
+      setName("");
+      setPhone("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("שליחת הטופס נכשלה. נסה שוב מאוחר יותר.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -42,77 +90,75 @@ const FileUploadForm = () => {
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        width: "200%", // Doubled width for larger display
-        maxWidth: "900px", // Responsive max-width
-        minHeight: "300px", // Increased height
+        width: "100%",
+        maxWidth: "600px",
         margin: "0 auto",
-        padding: 4, // Extra padding for spacing
+        padding: 4,
         display: "flex",
         flexDirection: "column",
         gap: 3,
         borderRadius: "8px",
-        boxSizing: "border-box", // Ensure consistent layout
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        boxSizing: "border-box",
       }}
       noValidate
       autoComplete="off"
     >
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <TextField
-          id="file1"
+          id="name"
           type="text"
           required
           fullWidth
-          value={file1}
-          onChange={(e) => setFile1(e.target.value)}
-          placeholder="שם:"
-          error={!!error.file1}
-          helperText={error.file1}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          error={!!error.name}
+          helperText={error.name}
+          placeholder="שם"
+          aria-label="שם"
         />
-
         <TextField
-          id="file2"
-          type="text"
+          id="phone"
+          type="tel"
           required
           fullWidth
-          value={file2}
-          onChange={(e) => setFile2(e.target.value)}
-          placeholder="טלפון"
-          error={!!error.file2}
-          helperText={error.file2}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          error={!!error.phone}
+          helperText={error.phone}
+          placeholder="מספר נייד"
+          aria-label="מספר נייד"
         />
-
         <TextField
           id="email"
           type="email"
           fullWidth
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          error={!!error.email}
+          helperText={error.email}
           placeholder="אימייל"
+          aria-label="אימייל"
         />
-
         <TextField
           id="message"
           multiline
-          rows={6} // Increased rows for more space
+          rows={6}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="ההודעה שלך:"
           fullWidth
+          aria-label="ההודעה שלך"
         />
       </Box>
 
-      <Button variant="contained" type="submit" sx={{ 
-        width: "100%", // Doubled width for larger display
-        minHeight: "20px", // Increased height
-        margin: "0 auto",
-        padding: 4, // Extra padding for spacing
-        display: "flex",
-        flexDirection: "column",
-        gap: 3,
-        borderRadius: "8px",
-        boxSizing: "border-box", // Ensure consistent layout
-}}>
-        צור איתי קשר
+      <Button
+        variant="contained"
+        type="submit"
+        sx={{ width: "100%" }}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "טוען..." : "צור איתי קשר"}
       </Button>
     </Box>
   );

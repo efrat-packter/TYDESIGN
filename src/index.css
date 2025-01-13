@@ -32,28 +32,158 @@ body {
 }
 
 /* קרוסלה */
-.carousel {
-    display: flex; /* Enable flexbox */
-
-   justify-content: center; /* Center the image horizontally */
-    align-items: center; /* Center the image vertically */
+/* .carousel {
+    display: flex; 
+   justify-content: center; 
+    align-items: center; 
     overflow: hidden;
     width: 100%;
     margin: 20px 0; 
-  
-  
 }
 
 .carousel-item img {
     width: 100%;
-    /* width: auto; */
     height: 100%;
     object-fit: cover;
+} */
+/* .carousel {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden;
+    width: 90vw; 
+    height: 90vh; 
+    margin: 0; 
 }
+
+.carousel-item img {
+    width: 100vw; 
+    height: 100vh; 
+    object-fit: cover; 
+} */
+.carousel {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: hidden; /* Prevent scrolling */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove margin for fullscreen */
+    position: relative; /* Position for absolute child elements if needed */
+    background-color: black; /* Optional: Provide a fallback background color */
+}
+
+.carousel-item img {
+    width: 98vw; /* Match the viewport width */
+    height: 98vh; /* Match the viewport height */
+    object-fit: cover; /* Ensure the image fills the container without distortion */
+}
+
 
 /* קצת עלי */
 .designer-image {
     width: 100%;
     height: 300px;
     object-fit: cover;
+}
+/* NavBar.css */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent */
+    backdrop-filter: blur(10px); /* Adds blur effect */
+    z-index: 1000;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar-links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-links li {
+    margin: 0 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links li:hover {
+    color: #f0a500; /* Highlight color on hover */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .navbar-links {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .navbar-links li {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+  }
+  /* AboutSection.css */
+.about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: row-reverse; /* Right-to-left layout for Hebrew */
+  max-width: 1200px;
+  width: 100%;
+  gap: 20px;
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.about-text {
+  flex: 2;
+  text-align: right;
+}
+
+.about-text h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  line-height: 1.8;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column-reverse; /* Stack image and text */
+    text-align: center;
+  }
+
+  .about-text {
+    padding: 0 10px;
+  }
 }

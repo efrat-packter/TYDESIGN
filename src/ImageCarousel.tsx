@@ -30,6 +30,18 @@ const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const images = GetParentImages();
 
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setCurrentIndex(0); // Reset index on resize if needed
+        };
+    
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    
+
     const nextImage = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % (images.length || 1)); // Avoid division by zero
     };
@@ -48,10 +60,15 @@ const Carousel = () => {
     return (
         <div id="projects" className="carousel">
             <div className="carousel-item">
-                <img
+                {/* <img
                     src={`http://localhost:3000/${images[currentIndex].path}`}
                     alt={`Project ${currentIndex + 1}`}
-                />
+                /> */}
+                <img
+    src={`http://localhost:3000/${images[currentIndex].path}`}
+    alt={`Project ${currentIndex + 1}`}
+/>
+
             </div>
         </div>
     );
