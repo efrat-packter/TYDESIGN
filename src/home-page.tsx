@@ -77,24 +77,26 @@
 
 // export default HomePage;
 import React, { useState, useEffect } from 'react';
-import FormComponent from './FormComonent';
+import FormComponent from './FormComponent';
 import Carousel from './ImageCarousel';
 import Gallery from './ProjectsGallery'
 import UploadProject from './upload';
 import NavBar from './Nav'
 import About from './about'
+import Footer from './Fotter';
 const HomePage = () => {
     return (
         <div>
 
-         <NavBar></NavBar> 
+         {/* <NavBar></NavBar>  */}
       <Carousel></Carousel>
 <Gallery></Gallery>
-<UploadProject></UploadProject>
-        
+{/* <UploadProject></UploadProject>
+         */}
 <About></About>
        
 <FormComponent></FormComponent>
+<Footer></Footer>
         </div>
     );
 };

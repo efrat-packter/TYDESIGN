@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import PhotoGallery from './PhotoGallery'
 import { useNavigate } from "react-router-dom";
 import { GetParentImages } from "./Images";
+import { Height } from "@mui/icons-material";
 
 const Gallery:React.FC= () => {   
   const images = GetParentImages();   
@@ -11,51 +12,52 @@ const Gallery:React.FC= () => {
    const handleImageClick = (id: number) => {
     navigate(`/PhotoGallery/${id}`);
   };
-  return (
+  return (<div className="main-container">
+<div className="projectGallery">
 
+<Box
+  sx={{
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)", // 3 cards per row
+    gap: 4, // Space between the cards
+    padding: 2,
+    "@media (max-width: 900px)": {
+      gridTemplateColumns: "repeat(2, 1fr)", // 2 cards per row for medium screens
+    },
+    "@media (max-width: 600px)": {
+      gridTemplateColumns: "repeat(1, 1fr)", // 1 card per row for small screens
+    },
+  }}
+>
+  {images.map((image, index) => (
     <Box
+      key={image.id}
       sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 2,
-        padding: 2,
-        "@media (max-width: 900px)": {
-          gridTemplateColumns: "repeat(2, 1fr)",
-        },
-        "@media (max-width: 600px)": {
-          gridTemplateColumns: "repeat(1, 1fr)",
-        },
+        border: "1px solid #ddd",
+        borderRadius: 0,
+        overflow: "hidden",
+        cursor: "pointer",
+        "&:hover": { boxShadow: 3 },
+        textAlign: "center",
+        height: 400, // Increased height
+        width: "100%", // Full width of the container
       }}
+      onClick={() => handleImageClick(image.id)}
     >
-      {images.map((image,index) => (   
-
-        <Box
-          key={image.id}
-          sx={{
-            border: "1px solid #ddd",
-            borderRadius: 2,
-            overflow: "hidden",
-            cursor: "pointer",
-            "&:hover": { boxShadow: 3 },
-            textAlign: "center",
-          }}
-        >
-
-          <div key={image.id} onClick={() => handleImageClick(image.id)} style={{ cursor: 'pointer' }}>
-  
-          <img               
-
-            src={`http://localhost:3000/${(images[index]).path}`}
-            alt={image.name}
-            style={{ width: "100%", height: "auto", display: "block" }}
-          />
-          </div>
-          {/* <Typography variant="h6" sx={{ padding: 1 }}>
-            {image.name}
-          </Typography> */}
-        </Box>
-      ))}
+      <img
+        src={`http://localhost:3000/${images[index].path}`}
+        alt={image.name}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover", // Ensures the image covers the container
+        }}
+      />
     </Box>
+  ))}
+</Box>
+
+    </div></div>
   );
 };
 export default Gallery;
