@@ -38,7 +38,7 @@
 // };
 // export default AboutSection;
 import React from "react";
-
+import imageSrc from "./R3SV1041.jpg";
 const AboutSection: React.FC = () => {
   return (
     <div className="main-container">
@@ -67,7 +67,7 @@ const AboutSection: React.FC = () => {
                 מדויק שיביא אושר, שלווה, והרמוניה לביתכם.
               </p>
             </div>  <div className="about-image">
-              <img src="h2.jpg" alt="המעצבת" />
+              <img src="לוגו.jpg" alt="המעצבת" />
             </div>
 
           </div>

@@ -22,26 +22,47 @@
 // };
 
 // export default NavBar;
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NavBar: React.FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleImageClick = (id: string) => {
-    navigate(`/${id}`);
+  const handleNavigation = (path: string) => {
+
+    navigate(`/${path}`);
+    setMenuOpen(false); // Close the menu after navigation
   };
 
   return (
     <div className="main-container">
       <nav className="navbar">
-        <div className="logo">MySite</div>
-        <ul className="navbar-links">
+       
+
+        {/* Hamburger menu toggle button */}
+        <button
+          className="menu-toggle"
+          onClick={() => setMenuOpen((prev) => !prev)}
+        >
+          ☰
+        </button>
+
+        {/* Links */}
+        <ul className={`navbar-links ${menuOpen ? "open" : ""}`}>
+          <li onClick={() => handleNavigation("")}>דף ראשי</li>
+          <li onClick={() => handleNavigation("ProjectsGallery")}>פרויקטים</li>
+          <li onClick={() => handleNavigation("AboutSection")}>אודות</li>
+          <li onClick={() => handleNavigation("FileUploadForm")}>צור קשר</li>
+{/* 
           <li onClick={() => handleImageClick("")}>דף ראשי</li>
-          <li onClick={() => handleImageClick("ProjectsGallery")}>פרויקטים</li>
-          <li onClick={() => handleImageClick("AboutSection")}>אודות</li>
-          <li onClick={() => handleImageClick("FileUploadForm")}>צור קשר</li>
+        <li onClick={() => handleImageClick("ProjectsGallery")}>פרויקטים</li>
+         <li onClick={() => handleImageClick("AboutSection")}>אודות</li>
+        <li onClick={() => handleImageClick("FileUploadForm")}>צור קשר</li> */}
         </ul>
+        <div className="logo" onClick={() => handleNavigation("")}>
+          TYDESIGN
+        </div>
       </nav>
     </div>
   );

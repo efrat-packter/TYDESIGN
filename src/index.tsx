@@ -47,6 +47,7 @@ import FileUploadForm from './FormComponent';
 import Layout from './Layout';
 
 import Upload from './upload';
+import Secret from './Secret';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -56,13 +57,13 @@ root.render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="ProjectsGallery" element={<ProjectsGallery />} />
+          <Route path="ProjectsGallery" element={<ProjectsGallery myurl='' />} />
           <Route path="PhotoGallery/:imageId" element={<PhotoGallery />} />
           <Route path="AboutSection" element={<AboutSection />} />
           <Route path="FileUploadForm" element={<FileUploadForm />} />
           
           {/* Protect the /upload route */}
-          {/* <Route
+          {/* <Route+
             path="upload"
             element={
               localStorage.getItem("isAuthenticated") === "true" ? (
@@ -74,7 +75,9 @@ root.render(
           /> */}
           
           {/* SecretRoute prompts user to enter password */}
-          <Route path="protected" element={  <Upload />} />
+          {/* <Route path="protected/ProjectsGallery" element={<ProjectsGallery2 />} /> */}
+
+          <Route path="protected" element={  <Secret />} />
         </Route>
       </Routes>
     </Router>

@@ -83,20 +83,20 @@ import Gallery from './ProjectsGallery'
 import UploadProject from './upload';
 import NavBar from './Nav'
 import About from './about'
-import Footer from './Fotter';
+import Footer from './Footer';
 const HomePage = () => {
     return (
         <div>
 
          {/* <NavBar></NavBar>  */}
       <Carousel></Carousel>
-<Gallery></Gallery>
-{/* <UploadProject></UploadProject>
-         */}
+<Gallery myurl=''></Gallery>
+{/* <UploadProject></UploadProject> */}
+        
 <About></About>
        
 <FormComponent></FormComponent>
-<Footer></Footer>
+{/* <Footer></Footer> */}
         </div>
     );
 };

@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { GetParentImages } from "./Images";
+import Image from "./interface/image";
 
 // const Carousel=()=>
 // {
@@ -28,7 +29,16 @@ import { GetParentImages } from "./Images";
 // export default Carousel
 const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const images = GetParentImages();
+    const [images, setImages] = useState<Image[]>([]);
+
+  useEffect(() => {
+     const fetchImages = async () => {
+       const fetchedImages = await GetParentImages();
+       setImages(fetchedImages);
+     };
+     fetchImages();
+   }, []);
+ 
 
 
     useEffect(() => {
@@ -61,10 +71,7 @@ const Carousel = () => {
         <div className="main-container">
         <div id="projects" className="carousel">
             <div className="carousel-item">
-                {/* <img
-                    src={`http://localhost:3000/${images[currentIndex].path}`}
-                    alt={`Project ${currentIndex + 1}`}
-                /> */}
+             
                 <img
                     src={`http://localhost:3000/${images[currentIndex].path}`}
                     alt={`Project ${currentIndex + 1}`}

@@ -161,12 +161,13 @@
 
 
 // export default FileUploadForm;
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import axios from "axios";
 import "./index.css";
 
 const FileUploadForm = () => {
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -226,13 +227,62 @@ const FileUploadForm = () => {
       setIsSubmitting(false);
     }
   };
+  const words = ["משרד", "בית", "חדר"];
+  const [word, setWord] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
+  
+  useEffect(() => {
+    if (!isTyping) return; // Prevent restarting when not needed
+  
+    const currentWord = words[currentIndex];
+  
+    // Typing animation
+    if (currentCharIndex < currentWord.length) {
+      const typingInterval = setTimeout(() => {
+        setWord((prev) => prev + currentWord[currentCharIndex]);
+        setCurrentCharIndex((prev) => prev + 1);
+      }, 150); // Adjust speed as needed
+  
+      return () => clearTimeout(typingInterval);
+    } else {
+      // Wait before deleting
+      setTimeout(() => {
+        setWord(""); // Clear the word
+        setCurrentCharIndex(0); // Reset typing index
+        setCurrentIndex((prev) => (prev + 1) % words.length); // Move to next word
+      }, 2000); // Pause before deleting
+    }
+  }, [currentCharIndex, isTyping, currentIndex]);
+  
+  useEffect(() => {
+    if (word === "") {
+      setIsTyping(true); // Restart typing animation
+    }
+  }, [word]);
+  
 
   return (
+
+
+    
     <div className="main-container">
+      <div className="form">
+      {/* <p className="form-text">{sentence}</p> */}
+ 
+
+      <p className="form-text">
+      בואו לשפץ את ה<span>{word}</span>{/* The word will change inside the span */}
+      <span className="cursor">| </span>  {/* This represents the cursor */} 
+       שלכם</p>
+
+
+        {/* <div className="formFields"> */}
     <Box className="form-card">
-      <Typography variant="h5" className="form-heading">
+      {/* <Typography variant="h5" className="form-heading">
         צור קשר
-      </Typography>
+      </Typography> */}
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -278,7 +328,7 @@ const FileUploadForm = () => {
           label="הודעה"
           variant="standard"
           multiline
-          rows={4}
+           rows={3}
           fullWidth
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -295,6 +345,8 @@ const FileUploadForm = () => {
         </Button>
       </Box>
     </Box></div>
+    </div>
+    // </div>
   );
 };
 

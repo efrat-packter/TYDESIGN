@@ -1,97 +1,109 @@
-// import React, { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { GetChildImages } from './Images';
-// import UploadPoject from './upload';
-// import { PhotoProvider, PhotoView } from 'react-photo-view';
-// import 'react-photo-view/dist/react-photo-view.css';
-// // import Zoom from 'react-medium-image-zoom'; // import the zoom component
-// // import 'react-medium-image-zoom/dist/styles.css';
 
-// const PhotoGallery = () => {
-//   const { imageId } = useParams();
-//   const images = GetChildImages(Number(imageId));  // Use the custom hook
-//   const [lightboxImage, setLightboxImage] = useState(null);
-  
-//   // if (!images.length) {
-//   //   return <div>Loading images...</div>;
-//   // }
-
-//   return (
-//     <div className="main-container">
-//       <h1>Photo Gallery</h1>
-//       <UploadPoject id={imageId}></UploadPoject>
-
-//       {images.length ? (
-//         <PhotoProvider>
-//         <div className="gallery-container">
-          
-//           {images.map((image, index) => (
-//             <div key={image.id} className="gallery-item">
-//               <PhotoView src={`http://localhost:3000/${(images[index]).path}`}>
-//               <img
-//                 src={`http://localhost:3000/${(images[index]).path}`}
-//                 alt={image.name}
-//                 className="gallery-image"
-//               />
-//               </PhotoView>
-//             </div>
-//           ))}
-//         </div>
-//         </PhotoProvider>
-//       ) : (
-//         <p>No images found.</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default PhotoGallery;
-
-
-
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { GetChildImages } from './Images';
+import React, { useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { GetChildImages ,GetImage} from './Images';
 import UploadPoject from './upload';
-import { PhotoProvider, PhotoView } from 'react-photo-view';
-import 'react-photo-view/dist/react-photo-view.css';
+interface Image {
+  id: number;
+  path: string;
+  name: string;
+}
 
 const PhotoGallery = () => {
-  const { imageId } = useParams();
+    const location = useLocation();
+  const { url } = (location.state as { url: string }) || {}; // Type assertion for state
+  const [lightbox, setLightbox] = useState<{
+    isOpen: boolean;
+    currentIndex: number | null;
+  }>({ isOpen: false, currentIndex: null });
   const [refreshKey, setRefreshKey] = useState(0); // מפתח רענון
-  const images = GetChildImages(Number(imageId), refreshKey);
+    const { imageId } = useParams();
+    const images = GetChildImages(Number(imageId), refreshKey);
+    const mainImage=GetImage(Number(imageId));
 
-  const handleUploadSuccess = () => {
-    setRefreshKey((prevKey) => prevKey + 1); // מעדכן את המפתח
+    
+    const openLightbox = (index: number) => {
+    setLightbox({ isOpen: true, currentIndex: index });
   };
 
-
+  const closeLightbox = () => {
+    setLightbox({ isOpen: false, currentIndex: null });
+  };
+  const showNextImage = () => {
+    setLightbox((prev) => {
+      if (prev.currentIndex === null) {
+        return prev; // No change if currentIndex is null
+      }
+      return {
+        ...prev,
+        currentIndex: (prev.currentIndex + 1) % images.length, // Loop to the start
+      };
+    });
+  };
+  
+  const showPrevImage = () => {
+    setLightbox((prev) => {
+      if (prev.currentIndex === null) {
+        return prev; // No change if currentIndex is null
+      }
+      return {
+        ...prev,
+        currentIndex:
+          (prev.currentIndex - 1 + images.length) % images.length, // Loop to the end
+      };
+    });
+  };
+    const handleUploadSuccess = () => {
+    setRefreshKey((prevKey) => prevKey + 1); // מעדכן את המפתח
+  };
+  const shouldDisplayUpload = url=== 'protected';
   return (
     <div>
-      <h1>Photo Gallery</h1>
-      {/* העברת פונקציית הרענון כ-prop לקומפוננטת העלאת התמונות */}
-      <UploadPoject id={imageId} onUploadSuccess={handleUploadSuccess} />
 
-      {images.length ? (
-        <PhotoProvider>
-          <div className="gallery-container">
-            {images.map((image, index) => (
-              <div key={image.id || index} className="gallery-item">
-                <PhotoView src={`http://localhost:3000/${image.path}`}>
-                  <img
-                    src={`http://localhost:3000/${image.path}`}
-                    alt={image.name}
-                    className="gallery-image"
-                  />
-                </PhotoView>
-              </div>
-            ))}
-          </div>
-        </PhotoProvider>
-      ) : (
-        <p>No images found.</p>
+
+     { shouldDisplayUpload && <UploadPoject id={imageId} onUploadSuccess={handleUploadSuccess} />} 
+<div className="top-section">
+<img
+            src={`http://localhost:3000/${mainImage?.path}`}
+            alt={mainImage?.name}
+            className="top-image"          />
+  <h1 className="top-text">{mainImage?.title}</h1>
+{mainImage?.text}</div>
+    <div className="gallery-container">
+      {images.map((image, index) => (
+        <div
+          key={image.id}
+          className="gallery-item"
+          onClick={() => openLightbox(index)}
+        >
+          <img
+            src={`http://localhost:3000/${image.path}`}
+            alt={image.name}
+            className="gallery-image"
+          />
+        </div>
+      ))}
+
+      {/* Lightbox Overlay */}
+      {lightbox.isOpen && lightbox.currentIndex !== null && (
+        <div className="lightbox-overlay active">
+          <img
+            src={`http://localhost:3000/${images[lightbox.currentIndex].path}`}
+            alt={images[lightbox.currentIndex].name}
+            className="lightbox-image"
+          />
+          <button className="lightbox-close" onClick={closeLightbox}>
+            ✕
+          </button>
+          <button className="lightbox-prev" onClick={showPrevImage}>
+            ‹
+          </button>
+          <button className="lightbox-next" onClick={showNextImage}>
+            ›
+          </button>
+        </div>
       )}
-    </div>
+    </div></div>
   );
 };
 

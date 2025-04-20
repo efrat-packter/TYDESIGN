@@ -224,7 +224,7 @@ height: 100vh;
 body { direction: rtl; /* הכוונה לשמאל לימין */
   font-family: Arial, sans-serif;
   font-family: Arial, sans-serif;
-  background-color: black;
+  background-color:black;
   color:white;
 }
 
@@ -274,7 +274,7 @@ form {
   padding: 20px;
   /* border-radius: 8px; */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 form .form-group {
@@ -406,10 +406,30 @@ img {
     padding: 8px;
   }
 }
-
+.form-text {
+  font-size: 24px;
+   font-family: Arial, sans-serif;
+   display: inline;
+   /* white-space: nowrap;
+   overflow: hidden; */
+ }
+ 
+ .cursor {
+   display: inline-block;
+   width: 7px;
+   background-color: white;
+   animation: blink 0.8s step-start infinite;
+ }
+ 
+ @keyframes blink {
+   50% {
+     background-color: transparent;
+   }
+ }
+/* navbar  */
 .navbar {
-  background-color: #333; /* צבע רקע כהה */
-  padding: 15px 30px;
+  background-color: black;
+  padding: 30px 33px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -420,41 +440,41 @@ img {
 }
 
 .navbar .logo {
-  font-size: 24px;
+  font-size: 29px;
   font-weight: bold;
-  color: #fff;
+  color: #e8e5e2;
   text-transform: uppercase;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
+/* .navbar-links{
+  justify-content:  center;
+  flex-grow: 1;
+} */
 .navbar .navbar-links {
   display: flex;
   list-style: none;
-  margin-right: 0; /* דואג שהפריטים יתחילו מימין */
+  margin-right: 0;
 }
 
 .navbar .navbar-links li {
+  font-size: x-large;
   margin: 0 20px;
   cursor: pointer;
-  text-align: right; /* מציין שהטקסט יהיה מיושר לימין */
-}
+  text-align: right;
+  transition: transform 0.3s ease; /* Add smooth transition for scaling */
 
-.navbar .navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
 }
 
 .navbar .navbar-links li:hover {
-  background-color: #007BFF;
+  /* background-color: #007bff;
+  color: white; */
+  /* background-color: #007bff; */
   color: white;
+  transform: scale(1.2); /* Scale the text to 1.2 times its original size */
 }
 
-/* עיצוב עבור אייקון תפריט למובייל */
 .navbar .menu-toggle {
   display: none;
   background-color: transparent;
@@ -464,12 +484,7 @@ img {
   cursor: pointer;
 }
 
-/* רספונסיביות */
 @media (max-width: 768px) {
-  .navbar {
-    padding: 15px 20px;
-  }
-
   .navbar .navbar-links {
     display: none;
     width: 100%;
@@ -483,6 +498,10 @@ img {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
+  .navbar .navbar-links.open {
+    display: flex;
+  }
+
   .navbar .navbar-links li {
     padding: 12px 15px;
     text-align: center;
@@ -491,10 +510,6 @@ img {
 
   .navbar .menu-toggle {
     display: block;
-  }
-
-  .navbar.open .navbar-links {
-    display: flex;
   }
 }
 
@@ -507,15 +522,17 @@ img {
     font-size: 14px;
   }
 }
+
 /* עיצוב עבור About Section */
 .about-section {
+  border: 10px solid black;
   display: flex;
   align-items: center; /* מיישר את התוכן במרכז האנך */
   justify-content: space-between; /* יוצר רווחים שווים בין התמונה והכיתוב */
   padding: 20px;
-  background-color: #fff;
+  background-color:black;
   border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 4px 8px rgba(225, 225, 225, 0.8); */
 }
 
 .about-container {
@@ -525,14 +542,16 @@ img {
 }
 .about-section .about-text {
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   font-size: 18px;
   line-height: 1.6;
+  color: white;
 }
 
 .about-section .about-image {
-  flex: 0 0 40%; /* התמונה תיקח עד 40% מהמרחב */
+  flex: 0 0 60%; /* התמונה תיקח עד 40% מהמרחב */
   max-width: 100%;
+
   height: auto;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -555,66 +574,115 @@ img {
     padding: 10px;
   }
 }
-.form-card {
-  max-width: 450px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-.form-heading {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2a9d8f;
-  font-weight: bold;
-}
 
-.form-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
-.input-field .MuiInput-root {
-  transition: all 0.3s ease;
-  border-bottom: 2px solid #dcdcdc;
-}
 
-.input-field .MuiInput-root:focus-within {
-  border-bottom: 2px solid #2a9d8f;
-}
+
+.form {border: 10px solid black;
+   display: flex;
+    justify-content: space-between;
+     padding: 50px;
+      background-color: black; /* רקע שחור */
+       border-radius: 8px;
+     flex-wrap: wrap;}
+.form-text {
+   flex: 1;
+    padding-left: 1px;
+     padding-right: 1px;
+      font-size: 28px;
+       color: white;}
+/* צד ימין – השדות */.form-card {
+   border: 1px solid #e2e8ee;
+    direction: rtl; /* שינוי הכיוון של התווית מימין לשמאל */text-align: center;
+
+
+     flex: 0 0 60%;
+ max-width: 500px;
+ margin-right: auto;
+  padding-left: 1px;
+   padding-right: 1px;
+   background-color: transparent; /* ללא רקע */}
+/* תוכן הטופס */.form-content {
+   display: flex;
+    flex-direction: column;
+    gap: 10px; /* רווח בין שדות */
+     background: transparent;}
+/* שדות הקלט */.input-field .MuiInputBase-root {
+   
+   border: 1px solid #1ced0d;
+    border-radius: 6px;
+    padding: 10px;
+     background-color: transparent; /* לא רקע לבן */
+     color: white; /* טקסט לבן */
+      transition: border-color 0.3s ease;}
+/* מסגרת בצבע טורקיז כאשר בפוקוס */.input-field .MuiInputBase-root.Mui-focused {
+   border-color: #2a9d8f;}
+/* טקסט בתוך התווית *//* טקסט בתוך התווית */.input-field label {
+   color: white;
+   direction: rtl; /* שינוי הכיוון של התווית מימין לשמאל */}
 
 .input-field .MuiFormHelperText-root {
-  font-size: 0.8rem;
-  color: #e63946;
-}
-
-.submit-btn {
-  margin-top: 20px;
-  background-color: #2a9d8f;
-  color: white;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
+   font-size: 0.8rem;
+   color: #e63946;}
+/* כפתור שליחה */.submit-btn {
+   margin-top: 20px;
+    background-color: #2a9d8f;
+    color: white;
+    padding: 12px;
+   border-radius: 8px;
+    font-size: 1rem;
+     font-weight: bold;
+    transition: background-color 0.3s ease;
+     width: 100%;}
 .submit-btn:hover {
-  background-color: #217c72; /* Slightly darker green */
-}
+   background-color: #217c72;}
+/* רספונסיביות */@media (max-width: 768px) {
+   .form {
+   flex-direction: column;
+    align-items: center;
+   }
+
+    .form-text {
+       width: 100%;
+   text-align: center;
+ }
+
+  .form-card {
+   width: 100%;
+    max-width: 100%;
+ }}
+@media (max-width: 480px) {
+   .form {
+  padding: 15px;
+ }
+
+   .form-text {
+     font-size: 16px;
+ }
+
+  .form-card {
+     height: auto;
+ }}.input-field .MuiInputBase-root {
+   background-color: transparent !important; /* הכרחי לעקוף ערך דיפולטי */
+    color: white;}
+.input-field .MuiFilledInput-root {
+  background-color: transparent !important;}
+
+
 /* Carousel container */
 
 .carousel {
-  width: 100%;  /* Full width */
-  height: calc(100vh - 60px); /* Full height of the viewport minus the height of the navbar (60px as an example) */
+  
+  border: 1px solid white; /* Border on all sides */
 
-  height: 500px; 
-  overflow: hidden;  /* Hide anything outside the container */
-  position: relative;
+  width: 90%; /* Reduced width (adjust as needed) */
+  height: calc(100vh - 60px); /* Full height minus navbar height */
+  overflow: hidden; /* Hide anything outside the container */
+  position: relative; /* Positioning for child elements like indicators or navigation buttons */
+  margin: 0 auto; /* Centers the carousel horizontally */
 }
+
 
 /* Carousel item */
 .carousel-item {
@@ -625,6 +693,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 /* Carousel image */
@@ -634,40 +703,264 @@ img {
   object-fit: cover;  /* Ensures the image covers the container without stretching */
 }
 
-/* PhotoGallery */
-.gallery-container {
-  display: flex;
-  flex-wrap: wrap;  /* מאפשר לעטוף את התמונות אם אין מקום */
-  gap: 10px;  /* רווח בין התמונות */
-  justify-content: center;  /* ממקם את התמונות במרכז */
-}
 
-.gallery-item {
-  flex: 1 1 calc(25% - 10px);
-  /* כל תמונה תתפוס שליש מהשורה (עם רווחים) */
-  max-width: calc(25% - 10px);
+
+
+
+
+/* Main gallery container */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
-.gallery-image {
-  width: 360px;
-  height: 300px;  /* שיניתי מאוטומטי למאה אחוז, לא מתאים בכל הפרויקטים בגלל תמונות לאורך */
-  /* border-radius: 8px;  פינות מעוגלות */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* הצללה */
-  object-fit: cover;  /* תמונה תתאים למיכל שלה, מבלי לחתוך */
+/* Each gallery item */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  /* border-radius: 12px; */
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* למכשירים קטנים (מובייל) */
-@media (max-width: 600px) {
-  .gallery-item {
-    flex: 1 1 calc(100% - 10px);  /* תמונה תתפוס את כל השורה */
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Images */
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* border-radius: 12px; */
+}
+
+
+.top-section
+{
+width: 100%;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.top-image
+{
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+.top-text
+{
+  color: white;
+  font-size: 48px;
+  font-weight: unset;
+  background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 100%; /* Make text block span the full width */
+  text-align: center; 
+  
+}
+/* Lightbox overlay */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Lightbox image */
+.lightbox-image {
+  max-width: 90%;
+  max-height: 80%;
+  /* border-radius: 12px; */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
   }
 }
 
-/* למסכים בינוניים */
-@media (max-width: 1024px) {
-  .gallery-item {
-    flex: 1 1 calc(50% - 10px);  /* תמונה תתפוס חצי מהשורה */
+/* Close button */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  padding: 10px 15px;
+  /* border-radius: 50%; */
+  cursor: pointer;
+  z-index: 1100;
+  /* transition: background 0.3s ease; */
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: #000;
+}
+
+/* Navigation buttons */
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 36px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  padding: 10px 20px;
+  /* border-radius: 50%; */
+  cursor: pointer;
+  z-index: 1100;
+  /* transition: background 0.3s ease; */
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: #000;
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+
+
+
+
+
+
+
+.projectGallery ,.about,.form
+{
+  border-top: 3px solid white; 
+  width: 80%;
+   margin: 20px auto 0; 
+}
+
+
+
+
+
+
+
+
+/* 
+@media (max-width: 768px) {
+  .form {
+    flex-direction: column; 
+    text-align: center;
+  }
+
+  .form .formFields {
+    width: 80%; 
+    margin-bottom: 20px;
+  }
+
+  .form .form-text {
+    padding: 10px;
+  }
+} */
+
+
+
+/* This is to make sure the footer only appears at the bottom when you scroll to the end */
+/* .footer-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 20vh; 
+}
+ */
+
+ .footer-container {
+  width: 100%;
+  color: white;
+}
+
+.footer {
+  /* color: rgb(217, 69, 69) !important; */
+
+  background-color: #282c34;
+  color: white;
+  padding: 30px 50px !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.footer-text {
+  font-size: 1rem !important;
+}
+
+.footer-links {
+
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.footer-link {
+  color: white !important;
+  font-size: 1rem !important;
+  text-decoration: none !important; 
+}
+
+.footer-link:hover {
+  text-decoration: underline !important;
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 50px;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
   }
 }
