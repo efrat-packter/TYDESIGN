@@ -67,7 +67,7 @@ const AboutSection: React.FC = () => {
                 מדויק שיביא אושר, שלווה, והרמוניה לביתכם.
               </p>
             </div>  <div className="about-image">
-              <img src="לוגו.jpg" alt="המעצבת" />
+              <img src="/לוגו.jpg" alt="המעצבת" />
             </div>
 
           </div>
