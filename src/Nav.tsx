@@ -50,9 +50,12 @@ const NavBar: React.FC = () => {
 
         {/* Links */}
         <ul className={`navbar-links ${menuOpen ? "open" : ""}`}>
-          <li onClick={() => handleNavigation("")}>דף ראשי</li>
-          <li onClick={() => handleNavigation("ProjectsGallery")}>פרויקטים</li>
+          <li onClick={() => handleNavigation("")}>ראשי</li>
           <li onClick={() => handleNavigation("AboutSection")}>אודות</li>
+          <li onClick={() => handleNavigation("ProjectsGallery")}>פרויקטים נבחרים</li>
+
+
+
           <li onClick={() => handleNavigation("FileUploadForm")}>צור קשר</li>
 {/* 
           <li onClick={() => handleImageClick("")}>דף ראשי</li>

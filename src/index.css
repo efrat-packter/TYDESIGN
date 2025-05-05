@@ -268,14 +268,16 @@ button:disabled {
   background-color: #dc3545;
 }
 
-/* עיצוב הטפסים */
-form {
-  background-color: white;
-  padding: 20px;
-  /* border-radius: 8px; */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0px;
+
+.css-2hy7sk-MuiFormLabel-root-MuiInputLabel-root {
+
+  text-align: center;
+  direction: ltr;
 }
+
+
+
+
 
 form .form-group {
   margin-bottom: 15px;
@@ -314,7 +316,7 @@ table {
 table th,
 table td {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #a42020;
   text-align: left;
 }
 
@@ -579,49 +581,102 @@ img {
 
 
 
-.form {border: 10px solid black;
-   display: flex;
-    justify-content: space-between;
-     padding: 50px;
-      background-color: black; /* רקע שחור */
-       border-radius: 8px;
-     flex-wrap: wrap;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.form-container {
+  border: 10px solid black;
+  display: flex;
+  align-items: center; /* מיישר את התוכן במרכז האנך */
+  justify-content: space-between; /* יוצר רווחים שווים בין התמונה והכיתוב */
+  padding: 20px;
+  background-color:black;
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* יוצר רווח שווה בין התמונה והכיתוב */
+}
+.form {
+  flex: 1;
+  /* padding: 10px; */
+  font-size: 18px;
+  line-height: 1.6;
+  color: white;
+  margin-right: 10px; /* הוסף רווח בין הטופס לתמונה */
+}
+
+.form-image {
+  flex: 0 0 50%; /* התמונה תיקח עד 40% מהמרחב */
+  /* max-width: 100%; */
+
+  height: auto;
+  /* border-radius: 8px; */
+  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+
+
+
+
+
+
+
 .form-text {
-   flex: 1;
-    padding-left: 1px;
+   /* flex: 1; */
+   padding-top: 28px;
+   padding-left: 1px;
      padding-right: 1px;
       font-size: 28px;
        color: white;}
-/* צד ימין – השדות */.form-card {
-   border: 1px solid #e2e8ee;
-    direction: rtl; /* שינוי הכיוון של התווית מימין לשמאל */text-align: center;
-
-
+/* צד ימין – השדות */
+.form-card {
+   text-align: center;
      flex: 0 0 60%;
  max-width: 500px;
- margin-right: auto;
-  padding-left: 1px;
-   padding-right: 1px;
+ /* margin-right: auto; */
+ padding-top: 28px;
+ padding-bottom:70PX;
    background-color: transparent; /* ללא רקע */}
-/* תוכן הטופס */.form-content {
+
+
+
+
+.form-content {
    display: flex;
     flex-direction: column;
     gap: 10px; /* רווח בין שדות */
      background: transparent;}
-/* שדות הקלט */.input-field .MuiInputBase-root {
+.input-field .MuiInputBase-root {
    
-   border: 1px solid #1ced0d;
-    border-radius: 6px;
+   border: 1.5px solid white;
+    border-radius: 4px;
     padding: 10px;
      background-color: transparent; /* לא רקע לבן */
      color: white; /* טקסט לבן */
       transition: border-color 0.3s ease;}
-/* מסגרת בצבע טורקיז כאשר בפוקוס */.input-field .MuiInputBase-root.Mui-focused {
-   border-color: #2a9d8f;}
-/* טקסט בתוך התווית *//* טקסט בתוך התווית */.input-field label {
+.input-field .MuiInputBase-root.Mui-focused {
+   border-color: #2a9d8f;
+   text-align: center;
+  }
+.input-field label {
    color: white;
-   direction: rtl; /* שינוי הכיוון של התווית מימין לשמאל */}
-
+   text-align: center;
+   }
 .input-field .MuiFormHelperText-root {
    font-size: 0.8rem;
    color: #e63946;}
@@ -676,7 +731,7 @@ img {
   
   border: 1px solid white; /* Border on all sides */
 
-  width: 90%; /* Reduced width (adjust as needed) */
+  width:100%; /* Reduced width (adjust as needed) */
   height: calc(100vh - 60px); /* Full height minus navbar height */
   overflow: hidden; /* Hide anything outside the container */
   position: relative; /* Positioning for child elements like indicators or navigation buttons */
@@ -870,11 +925,11 @@ align-items: center;
 
 
 
-.projectGallery ,.about,.form
+.projectGallery ,.about,.form-container
 {
   border-top: 3px solid white; 
   width: 80%;
-   margin: 20px auto 0; 
+   margin: 80px auto 100px; 
 }
 
 
@@ -884,32 +939,8 @@ align-items: center;
 
 
 
-/* 
-@media (max-width: 768px) {
-  .form {
-    flex-direction: column; 
-    text-align: center;
-  }
-
-  .form .formFields {
-    width: 80%; 
-    margin-bottom: 20px;
-  }
-
-  .form .form-text {
-    padding: 10px;
-  }
-} */
 
 
-
-/* This is to make sure the footer only appears at the bottom when you scroll to the end */
-/* .footer-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 20vh; 
-}
- */
 
  .footer-container {
   width: 100%;

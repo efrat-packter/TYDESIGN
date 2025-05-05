@@ -162,7 +162,8 @@
 
 // export default FileUploadForm;
 import React, { useEffect, useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import {  Button, Box, Typography } from "@mui/material";
 import axios from "axios";
 import "./index.css";
 
@@ -268,6 +269,7 @@ const FileUploadForm = () => {
 
     
     <div className="main-container">
+      <div className="form-container">
       <div className="form">
       {/* <p className="form-text">{sentence}</p> */}
  
@@ -292,7 +294,22 @@ const FileUploadForm = () => {
       >
         <TextField
           id="name"
+        
+// טלפון/ כתובת מייל: איך שנוח, כדי שנחזור אליך בהקדם
+// והצורך בקווים כללים: אנחנו קשובות תמיד, תכתבו.
           label="שם"
+          slotProps={{
+            inputLabel: {
+              sx: {
+                direction: 'rtl',
+                textAlign: 'right',
+                left: 'auto',
+                right: 0,
+                marginRight: '8px' // רווח קטן מהקצה הימני
+
+              }
+            }
+          }}
           variant="standard"
           fullWidth
           value={name}
@@ -304,6 +321,18 @@ const FileUploadForm = () => {
         <TextField
           id="phone"
           label="מספר נייד"
+          slotProps={{
+            inputLabel: {
+              sx: {
+                direction: 'rtl',
+                textAlign: 'right',
+                left: 'auto',
+                right: 0,
+                marginRight: '8px' // רווח קטן מהקצה הימני
+
+              }
+            }
+          }}
           variant="standard"
           fullWidth
           value={phone}
@@ -315,6 +344,18 @@ const FileUploadForm = () => {
         <TextField
           id="email"
           label="אימייל"
+          slotProps={{
+            inputLabel: {
+              sx: {
+                direction: 'rtl',
+                textAlign: 'right',
+                left: 'auto',
+                right: 0,
+                marginRight: '8px' // רווח קטן מהקצה הימני
+
+              }
+            }
+          }}
           variant="standard"
           fullWidth
           value={email}
@@ -326,6 +367,18 @@ const FileUploadForm = () => {
         <TextField
           id="message"
           label="הודעה"
+          slotProps={{
+            inputLabel: {
+              sx: {
+                direction: 'rtl',
+                textAlign: 'right',
+                left: 'auto',
+                right: 0,
+                marginRight: '8px' // רווח קטן מהקצה הימני
+
+              }
+            }
+          }}
           variant="standard"
           multiline
            rows={3}
@@ -344,8 +397,17 @@ const FileUploadForm = () => {
           {isSubmitting ? "שולח..." : "שלח הודעה"}
         </Button>
       </Box>
-    </Box></div>
+    </Box>
     </div>
+  
+
+    <div className="form-image">
+    <img src="/חתימה.jpg" alt="המעצבת" />
+    </div>
+
+    </div>
+    </div>
+    
     // </div>
   );
 };

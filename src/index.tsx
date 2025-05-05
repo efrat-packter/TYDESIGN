@@ -58,8 +58,9 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="ProjectsGallery" element={<ProjectsGallery myurl='' />} />
-          <Route path="PhotoGallery/:imageId" element={<PhotoGallery />} />
-          <Route path="AboutSection" element={<AboutSection />} />
+
+          <Route path="AboutSection" element={<AboutSection />} />  
+                  <Route path="PhotoGallery/:imageId" element={<PhotoGallery />} />
           <Route path="FileUploadForm" element={<FileUploadForm />} />
           
           {/* Protect the /upload route */}

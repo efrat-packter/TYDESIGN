@@ -90,10 +90,10 @@ const HomePage = () => {
 
          {/* <NavBar></NavBar>  */}
       <Carousel></Carousel>
-<Gallery myurl=''></Gallery>
 {/* <UploadProject></UploadProject> */}
         
 <About></About>
+<Gallery myurl=''></Gallery>
        
 <FormComponent></FormComponent>
 {/* <Footer></Footer> */}
